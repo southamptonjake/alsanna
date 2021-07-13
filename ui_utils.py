@@ -16,13 +16,13 @@ stdin_flags = fcntl.fcntl(stdin.fileno(), fcntl.F_GETFL)
 # add or modify what different keystrokes do.
 ###############################################################################
 def print_and_edit(message, intercept, color, editor):
-    colorful = "\033[38;5;" + str(color) + "m" + message + "\033[0m"
+    colorful = "\033[38;5;" + str(color) + "m" + str(message) + "\033[0m"
     print(colorful)  # Print received message
 
     # Open the message in an editor if required
     if intercept:
-        with tempfile.NamedTemporaryFile(mode="w+") as tmpfile:
-            tmpfile.write(str(message))
+        with tempfile.NamedTemporaryFile(mode="wb+") as tmpfile:
+            tmpfile.write(message)
             tmpfile.flush()
             subprocess.run([editor, tmpfile.name])
             tmpfile.seek(0)

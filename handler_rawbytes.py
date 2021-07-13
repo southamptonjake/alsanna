@@ -19,7 +19,7 @@ class Handler:
         return send_sock
 
     def bytes_to_message(self, bytes):
-        return str(bytes)
+        return bytes
 
     def message_to_bytes(self, message):
-        return ast.literal_eval(message)
+        return message
